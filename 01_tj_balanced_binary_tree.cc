@@ -48,29 +48,56 @@ struct TreeNode {
 //         return height(root) != -1;
 //     }
 // };
+// class Solution{
+// public:
+//     int height(TreeNode* root){
+//         if(root==nullptr){
+//             return 0;
+//         }
+//         if(height(root->left)==-1){
+//             return -1;
+//         }
+//         if(height(root->right)==-1){
+//             return -1;
+//         }
+//         int leftheight=height(root->left);
+//         int rightheight=height(root->right);
+//         if(abs(leftheight-rightheight)>1){
+//             return -1;
+//         }
+//         return max(leftheight,rightheight)+1;
+//     }
+//     bool isBalanced(TreeNode*root){
+//         return (height(root)!=-1);
+//     }
+// };
+
 class Solution{
 public:
-    int height(TreeNode* root){
+    int height(TreeNode*root){
         if(root==nullptr){
             return 0;
         }
-        if(height(root->left)==-1){
+        TreeNode*leftheight=root->left;
+        TreeNode*rightheight=root->right;
+        //当左右是非平衡树时，返回-1
+        if(height(rightheight)==-1){
             return -1;
         }
-        if(height(root->right)==-1){
+        if(height(leftheight)==-1){
             return -1;
         }
-        int leftheight=height(root->left);
-        int rightheight=height(root->right);
-        if(abs(leftheight-rightheight)>1){
+        if(abs(height(leftheight)-height(rightheight))>1){
             return -1;
         }
-        return max(leftheight,rightheight)+1;
+        return max(height(leftheight),height(rightheight))+1;
     }
+
     bool isBalanced(TreeNode*root){
         return (height(root)!=-1);
     }
 };
+
 
 int main() {
     Solution solution;
