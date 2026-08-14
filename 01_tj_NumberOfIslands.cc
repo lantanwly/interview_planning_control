@@ -62,33 +62,75 @@ using namespace std;
 //     }
 // };
 
+// class Solution{
+// public:
+//     int numIslands(vector<vector<char>>& grid){
+//         //行数
+//         int m=grid.size();
+//         if(m==0){
+//             return 0;
+//         }
+//         //列数
+//         int n=grid[0].size();
+//         //开始遍历所有数
+//         //岛屿数
+//         int island=0;
+//         //四个方向向量
+//         const int dir[4][2]={{-1,0},{1,0},{0,-1},{0,1}};
+
+//         for(int i=0;i<m;i++){
+//             for(int j=0;j<n;j++){
+//                 if(grid[i][j]=='1'){
+//                     island++;
+//                     grid[i][j]='0';  //将当前值改为0,避免重复计数
+//                     queue<pair<int,int>> q;
+//                     q.emplace(i,j);
+//                     while(!q.empty()){
+//                         auto [r,c]=q.front();q.pop();
+//                         for(int k=0;k<4;k++){
+//                             //遍历周围的点
+//                             int nr=r+dir[k][0];
+//                             int nc=c+dir[k][1];
+//                             if(nr>=0&&nr<m&&nc>=0&&nc<n&&grid[nr][nc]=='1'){
+//                                 grid[nr][nc]='0';
+//                                 q.emplace(nr,nc);
+//                             }
+//                         }
+//                     }
+//                 }
+                
+//             }
+//         }
+//         return island;
+        
+//     }
+
+// };
+
 class Solution{
-public:
-    int numIslands(vector<vector<char>>& grid){
-        //行数
+    public:
+    int numIslands(vector<vector<char>>&grid){
+        //行数,列数
         int m=grid.size();
         if(m==0){
             return 0;
         }
-        //列数
         int n=grid[0].size();
-        //开始遍历所有数
-        //岛屿数
         int island=0;
-        //四个方向向量
-        const int dir[4][2]={{-1,0},{1,0},{0,-1},{0,1}};
+        //方向向量
+        const int dir[4][2]={{1,0},{-1,0},{0,1},{0,-1}};
 
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
                 if(grid[i][j]=='1'){
                     island++;
-                    grid[i][j]='0';  //将当前值改为0,避免重复计数
+                    grid[i][j]='0';
+                    //BFS寻找周边的1
                     queue<pair<int,int>> q;
                     q.emplace(i,j);
                     while(!q.empty()){
                         auto [r,c]=q.front();q.pop();
                         for(int k=0;k<4;k++){
-                            //遍历周围的点
                             int nr=r+dir[k][0];
                             int nc=c+dir[k][1];
                             if(nr>=0&&nr<m&&nc>=0&&nc<n&&grid[nr][nc]=='1'){
@@ -98,13 +140,12 @@ public:
                         }
                     }
                 }
-                
             }
         }
-        return island;
-        
-    }
 
+        return island;
+
+    }
 };
 
 // 主函数：包含示例测试，方便手动验证
